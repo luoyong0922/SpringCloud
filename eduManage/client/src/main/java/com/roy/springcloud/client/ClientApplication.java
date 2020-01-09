@@ -20,7 +20,12 @@ public class ClientApplication {
     @Value("${server.port}")
     String port;
     @RequestMapping("/hi")
-    public String home(@RequestParam String name) {
-        return "hi "+name+",i am from port:" +port;
+    public String hi(@RequestParam String name) {
+        return "Hi "+name+",I am from port:" +port;
+    }
+
+    @RequestMapping("/")
+    public String home() {
+        return "Welcome,I am from port:" +port;
     }
 }

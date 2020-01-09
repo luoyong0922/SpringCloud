@@ -3,10 +3,7 @@ package com.roy.springcloud.feign.controller;
 import com.roy.springcloud.feign.service.HiService;
 import com.roy.springcloud.feign.service.SchedualServiceHi;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class HiController {
@@ -24,6 +21,11 @@ public class HiController {
 
     @RequestMapping(value = "/hello",method = RequestMethod.GET)
     public String sayHello(@RequestParam(value = "name") String name){
-        return service.sayHi(name);
+        return service.hiService(name);
+    }
+
+    @RequestMapping(value = "/consumer",method = RequestMethod.GET)
+    public String consumer(){
+        return schedualServiceHi.consumer();
     }
 }
