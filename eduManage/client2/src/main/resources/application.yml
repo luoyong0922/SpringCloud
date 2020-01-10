@@ -1,6 +1,6 @@
 spring:
   application:
-    name: springcloud-client
+    name: springcloud-client2
 server:
   port: 8088
 eureka:

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * 否则会出现 "com.netflix.client.ClientException: Load balancer does not have available server for client: springcloud-client" 错误
  * 需引入 spring-boot-starter-web 依赖，否则无法启动
  */
-@FeignClient(value = "SpringCloud-client",fallback = SchedualServiceHiHystric.class)
+@FeignClient(value = "SpringCloud-client1",fallback = SchedualServiceHiHystric.class)
 public interface SchedualServiceHi {
 
     @RequestMapping(value = "/hi",method = RequestMethod.GET)

@@ -1,0 +1,23 @@
+eureka:
+  instance:
+    hostname: localhost
+    nonSecurePort: 8086
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${eureka.instance.nonSecurePort}/eureka/
+spring:
+  application:
+    name: service-zuul
+server:
+  port: 8001
+zuul:
+  routes:
+    api-a:
+      path: /api-a/**
+      serviceId: springcloud-client1
+    api-b:
+      path: /api-b/**
+      serviceId: springcloud-client2
+    api-c:
+      path: /api-c/**
+      serviceId: openFeign

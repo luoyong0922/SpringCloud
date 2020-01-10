@@ -13,7 +13,7 @@ public class HiService {
 
     @HystrixCommand(fallbackMethod = "hiError")
     public String hiService(String name) {
-        return restTemplate.getForEntity("http://SPRINGCLOUD-CLIENT/hi?name="+name,String.class).getBody();
+        return restTemplate.getForEntity("http://SPRINGCLOUD-CLIENT2/hi?name="+name,String.class).getBody();
     }
 
     public String hiError(String name) {
