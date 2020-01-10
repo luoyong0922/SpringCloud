@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
  * 较底层的服务如果出现故障，会导致连锁故障。当对特定的服务的调用的不可用达到一个阀值（Hystric 是5秒20次） 断路器将会被打开。
  *
  * 断路打开后，可用避免连锁故障，fallback方法可以直接返回一个固定值。
+ *
+ * 微服务SpringCloud组件的断路器Hystrix的封装
+ * https://blog.csdn.net/orlaneBoy/article/details/79156122
  */
 @Component
 public class SchedualServiceHiHystric implements SchedualServiceHi {
