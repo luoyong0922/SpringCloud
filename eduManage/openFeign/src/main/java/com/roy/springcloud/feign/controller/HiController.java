@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class HiController {
 
+    // https://stackoverflow.com/questions/37565186/spring-couldnt-autowired-there-is-more-than-one-bean-of-type
+    // Spring Couldn't autowired,there is more than one bean of `` type
     @Autowired
     SchedualServiceHi schedualServiceHi;
 

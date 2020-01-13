@@ -1,0 +1,60 @@
+local-uri:
+server:
+  port: 8888
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8086/eureka/
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: git, svn
+  cloud:
+    config:
+      # 当使用复合环境时，重要的是所有repos都包含相同的标签。如果您有类似于上述的环境，并且使用标签master请求配置数据，但是SVN repo不包含称为master的分支，则整个请求将失败。
+#      label: master
+      server:
+        # 将导致配置客户端的所有应用程序独立于自己的配置读取foo=bar。（当然，应用程序可以以任何方式使用Config Server中的数据，因此覆盖不可强制执行，但如果它们是Spring Cloud Config客户端，则它们会提供有用的默认行为。）
+        overrides:
+          foo: bar-bar
+        #复合环境库 git svn
+        git:
+          uri: https://github.com/luoyong0922/SpringcloudConfig.git
+          # order属性的数值越低，优先级越高
+          order: 1
+          # 多个存储库
+          repos:
+            development:
+              pattern:
+                - "*/development"
+                # */staging是["*/staging", "*/staging,*"] 缩写
+                - "*/staging"
+              uri: https://github.com/luoyong0922/SpringcloudConfig.git
+              # 认证
+              username: name
+              password: password
+            staging:
+              uri: https://github.com/luoyong0922/SpringcloudConfig.git
+              # 默认情况下，首次请求配置时，服务器克隆远程存储库。服务器可以配置为在启动时克隆存储库。
+              cloneOnStart: true
+              # 服务器搜索顶级和“foo /”子目录以及名称以“bar”开头的任何子目录中的配置文件。
+              searchPaths: foo,bar*
+            simple:
+              uri: https://github.com/luoyong0922/SpringcloudConfig.git
+              # force-pull属性将使Spring Cloud Config Server强制从远程存储库中提取，如果本地副本是脏的
+              force-pull: true
+            local:
+              pattern: local*/dev*,*local*/dev*
+              uri: https://github.com/luoyong0922/SpringcloudConfig.git
+        svn:
+          uri: file:///path/to/svn/repo
+          order: 2
+        # 配置服务器附带运行状况指示器，检查配置的EnvironmentRepository是否正常工作。
+#        health:
+#          repositories:
+#            myservice:
+#              label: mylabel
+#            myservice-dev:
+#              name: myservice
+#              profiles: development
