@@ -16,12 +16,12 @@ public class ConfigClientApplication {
         SpringApplication.run(ConfigClientApplication.class, args);
     }
     // 防止未找到相关属性 （如：${foo}）而导致项目启动失败
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
-        PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
-        c.setIgnoreUnresolvablePlaceholders(true);
-        return c;
-    }
+//    @Bean
+//    public static PropertySourcesPlaceholderConfigurer placeholderConfigurer() {
+//        PropertySourcesPlaceholderConfigurer c = new PropertySourcesPlaceholderConfigurer();
+//        c.setIgnoreUnresolvablePlaceholders(true);
+//        return c;
+//    }
 
     @Value("${foo}")
     String foo;
@@ -29,11 +29,11 @@ public class ConfigClientApplication {
     public String hi(){
         return foo;
     }
-
-    @Value("${args}")
-    String args;
-    @RequestMapping(value = "/hello")
-    public String hello(){
-        return args;
-    }
+//
+//    @Value("${args}")
+//    String args;
+//    @RequestMapping(value = "/hello")
+//    public String hello(){
+//        return args;
+//    }
 }
