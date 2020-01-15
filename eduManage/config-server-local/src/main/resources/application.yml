@@ -29,3 +29,8 @@ spring:
             myservice-dev:
               name: myservice
               profiles: development
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
