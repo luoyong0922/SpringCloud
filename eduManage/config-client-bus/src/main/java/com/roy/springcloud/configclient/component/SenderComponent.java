@@ -13,8 +13,8 @@ public class SenderComponent {
     private AmqpTemplate rabbitmqTemplate;
 
     public void send(){
-        String content = "hello" + new Date();
+        String content = "hello " + new Date();
         System.out.println("Sender:" +content);
-        this.rabbitmqTemplate.convertAndSend("hello", content);
+        this.rabbitmqTemplate.convertAndSend("hello ", content);
     }
 }

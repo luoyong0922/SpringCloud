@@ -1,10 +1,14 @@
 package com.roy.springcloud.configclient;
 
+import com.roy.springcloud.configclient.component.ReceiverComponent;
+import com.roy.springcloud.configclient.component.SenderComponent;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,6 +34,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RefreshScope // 开启消息总线刷新配置功能
 public class ConfigClientBusApplication {
 
+    @Autowired
+    private SenderComponent sender;
+    @Autowired
+    private ReceiverComponent receiver;
+
     public static void main(String[] args) {
         SpringApplication.run(ConfigClientBusApplication.class, args);
     }
@@ -41,4 +50,16 @@ public class ConfigClientBusApplication {
         if(name.startsWith("$")) name = "配置文件未找到！";
         return name;
     }
+    @RequestMapping(value = "/send")
+    public String send(@RequestParam("name") String name){
+        sender.send();
+        return name+":消息已发送";
+    }
+
+    @RequestMapping(value = "/receive")
+    public String receive(@RequestParam("name") String name){
+        receiver.process(name);
+        return "消息已接收";
+    }
+
 }
