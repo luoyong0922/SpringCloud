@@ -10,8 +10,6 @@ spring:
   profiles:
     # 使用远程存储库
     active: git, svn
-    #使用本机配置文件
-#    active: native
   cloud:
     config:
       # 当使用复合环境时，重要的是所有repos都包含相同的标签。如果您有类似于上述的环境，并且使用标签master请求配置数据，但是SVN repo不包含称为master的分支，则整个请求将失败。
@@ -22,8 +20,6 @@ spring:
 #          foo: bar-bar
         #复合环境库 git svn
         git:
-          # 本地仓库
-#          uri: file:///D:/workspace/SpringcloudConfig
           # 远程仓库
           uri: https://github.com/luoyong0922/SpringcloudConfig.git
           # order属性的数值越低，优先级越高

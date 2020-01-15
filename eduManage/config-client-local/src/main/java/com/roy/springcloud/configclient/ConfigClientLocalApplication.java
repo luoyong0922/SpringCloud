@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class ConfigClientApplication {
+public class ConfigClientLocalApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ConfigClientApplication.class, args);
+        SpringApplication.run(ConfigClientLocalApplication.class, args);
     }
     // 防止未找到相关属性 （如：${foo}）而导致项目启动失败
     @Bean
@@ -31,11 +31,11 @@ public class ConfigClientApplication {
         return foo;
     }
 
-    @Value("${args}")
-    String args;
+    @Value("${name}")
+    String name;
     @RequestMapping(value = "/hello")
     public String hello(){
-        if(args.startsWith("$")) args = "配置文件未找到！";
-        return args;
+        if(name.startsWith("$")) name = "配置文件未找到！";
+        return name;
     }
 }
